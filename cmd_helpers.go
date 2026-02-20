@@ -58,3 +58,13 @@ func cmdEdit(tasks []Task, id int, newDescription string) ([]Task, error) {
 	err := saveTasks(tasks)
 	return tasks, err
 }
+
+func cmdUncomplete(tasks []Task, id int) ([]Task, error) {
+	index := findTaskByID(tasks, id)
+	if index == -1 {
+		return tasks, os.ErrNotExist
+	}
+	tasks[index].Completed = false
+	err := saveTasks(tasks)
+	return tasks, err
+}
