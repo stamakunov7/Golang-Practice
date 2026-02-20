@@ -48,3 +48,13 @@ func cmdDelete(tasks []Task, id int) ([]Task, error) {
 	err := saveTasks(tasks)
 	return tasks, err
 }
+
+func cmdEdit(tasks []Task, id int, newDescription string) ([]Task, error) {
+	index := findTaskByID(tasks, id)
+	if index == -1 {
+		return tasks, os.ErrNotExist
+	}
+	tasks[index].Description = newDescription
+	err := saveTasks(tasks)
+	return tasks, err
+}
