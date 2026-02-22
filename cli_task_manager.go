@@ -64,6 +64,23 @@ func main() {
 		}
 		println("Task completed successfully.")
 
+	case "uncomplete":
+		if len(args) < 2 {
+			println("Please provide the ID of the task to complete.")
+			return
+		}
+		taskID, err := strconv.Atoi(args[1])
+		if err != nil {
+			println("Invalid task ID:", args[1])
+			return
+		}
+		tasks, err = cmdUncomplete(tasks, taskID)
+		if err != nil {
+			println("Error uncompleting task:", err.Error())
+			return
+		}
+		println("Task uncompleted successfully.")
+
 	case "edit":
 		if len(args) < 3 {
 			println("Please provide the ID and Description of the task to edit.")
